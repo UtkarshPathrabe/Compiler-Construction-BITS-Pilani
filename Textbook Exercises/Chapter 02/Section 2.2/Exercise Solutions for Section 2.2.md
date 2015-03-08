@@ -81,91 +81,56 @@ Exercise 2.2.5
 #### Answer  
 1. Proof:  
     Any string derived from the grammar can be considered to be a sequence consisting of 11 and 1001, where each sequence element is possibly suffixed with a 0.  
-    Let `n` be the set of positions where `11` is placed. `11` is said to be at position `i` if the first `1` in `11` is at position `i`, where `i` starts at 0 and
-    grows from least significant to most significant bit.
+    Let `n` be the set of positions where `11` is placed. `11` is said to be at position `i` if the first `1` in `11` is at position `i`, where `i` starts at 0 and grows from least significant to most significant bit.  
+    Let `m` be the equivalent set for `1001`.  
+    The sum of any string produced by the grammar is:  
+    sum  
+    = ??<sub>n</sub> (2<sup>1</sup> + 2<sup>0</sup>) * 2 <sup>n</sup> + ??<sub>m</sub> (2<sup>3</sup> + 2<sup>0</sup>) * 2<sup>m</sup>  
+    = ??<sub>n</sub> 3 * 2 <sup>n</sup> + ??<sub>m</sub> 9 * 2<sup>m</sup>  
+    This is clearly divisible by 3.  
 
-    Let `m` be the equivalent set for `1001`.
+2. No. Consider the string "10101", which is divisible by 3, but cannot be derived from the grammar.  
 
-    The sum of any string produced by the grammar is:
-
-    sum
-
-    = ??<sub>n</sub> (2<sup>1</sup> + 2<sup>0</sup>) * 2 <sup>n</sup> + ??<sub>m</sub> (2<sup>3</sup> + 2<sup>0</sup>) * 2<sup>m</sup>
-
-    = ??<sub>n</sub> 3 * 2 <sup>n</sup> + ??<sub>m</sub> 9 * 2<sup>m</sup>
-
-    This is clearly divisible by 3.
-
-
-2. No. Consider the string "10101", which is divisible by 3, but cannot be
-   derived from the grammar.
-
-    Readers seeking a more formal proof can read about it below:
-
-    **Proof**:
-
-    Every number divisible by 3 can be written in the form `3k`. We will consider `k > 0` (though it would be valid to consider `k` to be an arbitrary integer).
-
-    Note that every part of num(11, 1001 and 0) is divisible by 3, if the grammar could generate all the numbers divisible by 3, we can get a production for binary k from num's production:
-
-    ```
+    Readers seeking a more formal proof can read about it below:  
+    
+    **Proof**:  
+    Every number divisible by 3 can be written in the form `3k`. We will consider `k > 0` (though it would be valid to consider `k` to be an arbitrary integer).  
+    Note that every part of num(11, 1001 and 0) is divisible by 3, if the grammar could generate all the numbers divisible by 3, we can get a production for binary k from num's production:  
+    ```  
     3k = num   -> 11 | 1001 | num 0 | num num
      k = num/3 -> 01 | 0011 | k 0   | k k
      k         -> 01 | 0011 | k 0   | k k
-    ```
+    ```  
+    It is obvious that any value of `k` that has more than 2 consecutive bits set to 1 can never be produced. This can be confirmed by the example given in the beginning:  
+    10101 is 3*7, hence, k = 7 = 111 in binary. Because 111 has more than 2 consecutive 1's in binary, the grammar will never produce 21.  
 
-    It is obvious that any value of `k` that has more than 2 consecutive bits set to 1 can never be produced. This can be confirmed by the example given in the beginning:
-
-    10101 is 3*7, hence, k = 7 = 111 in binary. Because 111 has more than 2
-    consecutive 1's in binary, the grammar will never produce 21.
-
-
-### 2.2.6
-
-Construct a context-free grammar for roman numerals.
-
+Exercise 2.2.6  
+--------------  
+Construct a context-free grammar for roman numerals.  
 **Note:** we just consider a subset of roman numerals which is less than 4k.
 
-
-#### Answer
-
-[wikipedia: Roman_numerals](http://en.wikipedia.org/wiki/Roman_numerals)
-
-- via wikipedia, we can categorize the single roman numerals into 4 groups:
-
+#### Answer  
+[wikipedia: Roman_numerals](http://en.wikipedia.org/wiki/Roman_numerals)  
+- via wikipedia, we can categorize the single roman numerals into 4 groups:  
     ```
     I, II, III | I V | V, V I, V II, V III | I X
-    ```
-
-    then get the production:
+    ```  
+    then get the production:  
 
     ```
     digit -> smallDigit | I V | V smallDigit | I X
     smallDigit -> I | II | III | ??
-    ```
-
-
-
-- and we can find a simple way to map roman to arabic numerals. For example:
-
-    - XII => X, II => 10 + 2 => 12
-    - CXCIX => C, XC, IX => 100 + 90 + 9 => 199
-    - MDCCCLXXX => M, DCCC, LXXX => 1000 + 800 + 80 => 1880
-
-- via the upper two rules, we can derive the production:
-
-    romanNum -> thousand hundred ten digit
-
-    thousand -> M | MM | MMM | ??
-
-    hundred -> smallHundred | C D | D smallHundred | C M
-
-    smallHundred -> C | CC | CCC  | ??
-
-    ten -> smallTen | X L | L smallTen | X C
-
-    smallTen -> X | XX | XXX | ??
-
-    digit -> smallDigit | I V | V smallDigit | I X
-
-    smallDigit -> I | II | III  | ??
+    ```  
+- and we can find a simple way to map roman to arabic numerals. For example:  
+    - XII => X, II => 10 + 2 => 12  
+    - CXCIX => C, XC, IX => 100 + 90 + 9 => 199  
+    - MDCCCLXXX => M, DCCC, LXXX => 1000 + 800 + 80 => 1880  
+- via the upper two rules, we can derive the production:  
+    romanNum -> thousand hundred ten digit  
+    thousand -> M | MM | MMM | ??  
+    hundred -> smallHundred | C D | D smallHundred | C M  
+    smallHundred -> C | CC | CCC  | ??  
+    ten -> smallTen | X L | L smallTen | X C  
+    smallTen -> X | XX | XXX | ??  
+    digit -> smallDigit | I V | V smallDigit | I X  
+    smallDigit -> I | II | III  | ??  
