@@ -70,6 +70,11 @@ For the block-structured code below, assuming the usual static scoping of declar
 
 #### Answer  
 Block B1:  
+| declarations  | scope         |  
+| :-----------: |:-------------:|  
+| col 3 is      | right-aligned |  
+| col 2 is      | centered      |  
+| zebra stripes | are neat      |  
 | declarations | scope    |
 | ------------ | -------- |
 |		w				   | B1-B3-B4 |
