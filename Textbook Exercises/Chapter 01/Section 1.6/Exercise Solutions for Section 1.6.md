@@ -70,12 +70,12 @@ For the block-structured code below, assuming the usual static scoping of declar
 
 #### Answer  
 Block B1:  
-|declarations|scope   |
-|------------|--------|
-|		w				 |B1-B3-B4|
-|		x				 |B1-B2-B4|
-|		y				 |B1-B5   |
-|		z				 |B1-B2-B5|  
+| declarations | scope    |
+| ------------ | -------- |
+|		w				   | B1-B3-B4 |
+|		x				   | B1-B2-B4 |
+|		y				   | B1-B5    |
+|		z				   | B1-B2-B5 |  
 Block B2:  
 |declarations|scope   |
 |------------|--------|
