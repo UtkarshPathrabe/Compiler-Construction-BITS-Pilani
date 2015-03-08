@@ -85,8 +85,8 @@ Exercise 2.2.5
     Let `m` be the equivalent set for `1001`.  
     The sum of any string produced by the grammar is:  
     sum  
-    = Σ<sub>n</sub> (2<sup>1</sup> + 2<sup>0</sup>) * 2 <sup>n</sup> + ??<sub>m</sub> (2<sup>3</sup> + 2<sup>0</sup>) * 2<sup>m</sup>  
-    = Σ<sub>n</sub> 3 * 2 <sup>n</sup> + ??<sub>m</sub> 9 * 2<sup>m</sup>  
+    = Σ<sub>n</sub> (2<sup>1</sup> + 2<sup>0</sup>) * 2 <sup>n</sup> + Σ<sub>m</sub> (2<sup>3</sup> + 2<sup>0</sup>) * 2<sup>m</sup>  
+    = Σ<sub>n</sub> 3 * 2 <sup>n</sup> + Σ<sub>m</sub> 9 * 2<sup>m</sup>  
     This is clearly divisible by 3.  
 
 2. No. Consider the string "10101", which is divisible by 3, but cannot be derived from the grammar.  
