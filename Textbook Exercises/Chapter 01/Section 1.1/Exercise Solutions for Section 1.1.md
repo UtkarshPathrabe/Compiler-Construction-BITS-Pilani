@@ -9,9 +9,6 @@ What is the difference between a `compiler` and an `interpreter`?
 
 A `compiler` is a program that can read a program in one language - the `source` language - and translate it into an equivalent program in another language - the `target` language and report any errors in the source program that it detects during the translation process.  
 `Interpreter` directly executes the operations specified in the source program on inputs supplied by the user.  
-A compiler typically lowers the level of abstraction of the program:  
-+ C -> assembly code for Sun Sparc  
-+ Java -> Java bytecode  
 C is typically compiled.  
 Scheme is typically interpreted.  
 Java is compiled to bytecodes, which are then interpreted.  
