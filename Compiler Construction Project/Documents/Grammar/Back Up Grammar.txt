@@ -1,0 +1,126 @@
+/* MAIN PROGRAM */
+<program> -> <_records> <_procedures> <execute>
+<execute> -> EXECUTE COLON <stmts> END
+
+/* RECORD DECLARATION */
+<_records> -> <records> | EPSILON
+<records> -> RECORDS COLON <recs> ENDRECORDS
+
+<recs> -> <rec> <_recs>
+<_recs> -> <recs> | EPSILON
+<rec> -> REC ID COLON <decl_stmts> ENDREC
+
+<_procedures> -> <procedures> | EPSILON
+
+/* PROCEDURE DECLARATION */
+<procedures> -> PROCS COLON <procs> ENDPROCS
+<procs> -> <proc> <_procs>
+<_procs> -> <procs> | EPSILON
+
+<proc> -> PROC ID LPAREN <param_list> RPAREN ARROW LPAREN <param_list> RPAREN COLON <stmts> ENDPROC
+
+<param_list> -> <basic_type> ID <_param_list>
+
+<_param_list> -> COMMA <param_list> | EPSILON
+
+/* STATEMENT */
+<stmts> -> <stmt> <_stmts>
+
+<_stmts> -> <stmts> | EPSILON
+
+<stmt> -> <decl_stmt> | <cond_stmt> | <loop_stmt> | <proc_call_stmt> | <assign_stmt> | <io_stmt> | <mat_assign_stmt> | <str_assign_stmt>
+
+/* DECLARATION STATEMENT */
+<decl_stmts> -> <decl_stmt> <_decl_stmts>
+<_decl_stmts> -> <decl_stmts> | EPSILON
+<decl_stmt> -> <type> <id_list> SEMICOLON
+
+<type> -> <basic_type> | STRING | MAT LT <basic_type> GT LSQ <dims> RSQ | REC ID
+
+<basic_type> -> INT | REAL | BOOL | CHAR
+
+<id_list> -> ID <_id_list>
+
+<_id_list> -> COMMA <id_list> | EPSILON
+
+<dims> -> <ind> <_dim_list>
+
+<_dim_list> -> COMMA <ind> | EPSILON
+
+/* CONDITIONAL STATEMENT*/
+<cond_stmt> -> IF LPAREN <conds> RPAREN COLON <stmts> <else_if> <_cond_stmt>
+
+<else_if> -> ELIF LPAREN <conds> RPAREN COLON <stmts> <else_if> | EPSILON
+
+<_cond_stmt> -> ELSE COLON <stmts> ENDIF | ENDIF
+
+/* IO STATEMENT */
+<io_stmt> -> GET LPAREN <var> RPAREN SEMICOLON | PUT LPAREN <put_param> RPAREN SEMICOLON
+
+<put_param> -> <var> | ENDL | TAB | DQUOTE STR_LIT DQUOTE
+
+<var> -> ID <_var>
+<_var> -> LSQ <dims> RSQ | DOT ID | EPSILON
+
+/* PROCEDURE CALL STATEMENT */
+<proc_call_stmt> -> CALL ID LPAREN <proc_arg_list> RPAREN ARROW LPAREN <proc_arg_list> RPAREN SEMICOLON
+
+<proc_arg_list> -> <arg_list> | EPSILON
+
+<arg_list> -> ID <arg_list1>
+<arg_list1> -> COMMA <arg_list> | LSQ <dims> RSQ <arg_list2> | DOT ID <arg_list2> | EPSILON
+<arg_list2> -> COMMA <arg_list> | EPSILON
+
+/* ITERATIVE STATEMENT */
+<loop_stmt>  -> LOOP LPAREN <assign_list> RPAREN LPAREN <conds> RPAREN LPAREN <assign_list> RPAREN COLON <iloop_stmts> ENDLOOP
+
+<iloop_stmts> -> <iloop_stmt> <iloop_stmts> | EPSILON
+<iloop_stmt> -> <stmt> | BREAK LPAREN <conds> RPAREN SEMICOLON | CONTINUE LPAREN <conds> RPAREN SEMICOLON
+
+<assign_list> -> <assign_stmt> <assign_list> | EPSILON
+
+/* CONDITION */
+<conds> -> LPAREN <conds> RPAREN <logical_op> LPAREN <conds> RPAREN | <elem> <rel_op> <elem> | NOT LPAREN <conds> RPAREN | BOOL_LIT
+
+<logical_op> -> AND | OR
+
+<rel_op> -> LT | GT | LE | GE | EQ | NEQ
+
+<elem> -> <var> | INT_LIT | REAL_LIT | SQUOTE CHAR_LIT SQUOTE
+
+/* ASSIGNMENT STATEMENT */
+<assign_stmt> -> ASSIGN <var> ASSIGN_OP <expr> SEMICOLON
+
+<expr> -> <term> <_expr>
+<_expr> -> <op_-+> <term> <_expr> | EPSILON
+
+<term> -> <expo_term> <_term>
+<_term> -> <op_*/%> <expo_term> <_term> | EPSILON
+
+<expo_term> -> <factor> <_expo_term>
+<_expo_term> -> <op_**> <factor> <_expo_term> | EPSILON
+
+<factor> -> LPAREN <expr> RPAREN | <var> | <const> | MINUS LPAREN <expr> RPAREN 
+
+<op_-+> -> PLUS | MINUS
+<op_*/%> -> MUL | DIV | MOD
+<op_**> -> POW
+
+/* MATRIX STATEMENT */
+<mat_assign_stmt> -> MATASSIGN ID ASSIGN_OP <mat_stmt>
+<mat_stmt> -> LCURL <row_list> RCURL SEMICOLON | ID <_mat_stmt>
+<_mat_stmt> -> PLUS ID SEMICOLON | MAT_ROWS SEMICOLON | MAT_COLS SEMICOLON
+
+<row_list> -> <row> <_row_list>
+<_row_list> -> SEMICOLON <row> <_row_list> | EPSILON
+
+<row> -> <const> <_row>
+<_row> -> COMMA <const> <row> | EPSILON
+
+<const> -> INT_LIT | REAL_LIT | BOOL_LIT | SQUOTE CHAR_LIT SQUOTE
+
+/* STRING STATEMENT */
+<str_assign_stmt> -> STRASSIGN ID ASSIGN_OP <str_stmt> 
+<str_stmt> -> DQUOTE STR_LIT DQUOTE SEMICOLON | ID <_str_stmt>
+<_str_stmt> -> SEMICOLON | PLUS ID SEMICOLON | LSQ <ind> RSQ SEMICOLON | STR_LENGTH SEMICOLON
+<ind> -> ID | INT_LIT

@@ -1,0 +1,109 @@
+* Keywords
+	AND
+	OR
+	NOT
+	true
+	false
+	procs
+	proc
+	endproc
+	endprocs
+	execute
+	end
+	loop
+	endloop
+	break
+	continue
+	if
+	elif
+	else
+	endif
+	int
+	real
+	string
+	char
+	bool
+	mat<>
+	get
+	put
+	
+* Identifiers
+	Numeral			[1-9][0-9_]*
+	Floating Numeral	[1-9][0-9]*.[1-9][0-9]*
+	Variables		[_a-zA-Z][_a-zA-Z0-9]*
+
+* Function Identifiers (function names. Example function name start with _ )
+	proc
+	endproc
+	Regex for function
+
+* Data Types (Example: Integers, Real, Record type, Array types....etc)
+	int
+	real
+	string
+	char
+	bool
+	mat<>
+
+* Functions ( where they should appear, simple vs. nested functions ....etc)
+	procs
+	endprocs
+
+* Statements: (Assignment statements, Declaration statements, return statement, Iterative
+statements, Conditional statements, Function Call statements).
+	execute
+	end
+	loop
+	endloop
+	break
+	continue
+	if
+	elif
+	else
+	endif
+	get
+	put
+
+* Expressions: (Arithmetic expressions, Boolean Expressions )
+	=
+	==
+	!=
+	>
+	>=
+	<
+	<=
+	+
+	-
+	*
+	/
+	%
+	**
+	~
+	^
+	|
+	&
+	>>
+	>>>
+	<<
+	AND
+	OR
+	NOT
+	true
+	false
+
+(
+)
+{
+}
+[
+]
+;
+->
+/*
+*/
+:
+_
+.
+"
+'
+,
