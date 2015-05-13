@@ -1,0 +1,28 @@
+( ) ; -> /* */ : _ . " ' ,
+= == != > >= < <=
++ - * / % **
+~ ^ | & >> >>> << { }
+AND
+OR
+NOT
+true
+false
+procs
+proc
+endproc
+loop
+endloop
+break
+continue
+if
+elif
+else
+endif
+int
+real
+string
+char
+bool
+mat<>
+get
+put
